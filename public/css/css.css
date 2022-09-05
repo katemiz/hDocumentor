@@ -1,0 +1,13 @@
+.strike {
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
+
+.footer_header_text {
+  color: #b2d23a;
+}
+
+.cizgi {
+  border: 0.1px solid #b2d23a;
+  /* //border-top: 1px solid #b2d23a; */
+}
