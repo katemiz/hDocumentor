@@ -70,9 +70,8 @@ class LetterController extends Controller
         );
 
         $this->props['references'] = implode('::', $refs);
+        $this->props['subject'] = $request->input('subject');
         $this->props['content'] = $request->input('editor_data');
-
-        //dd($this->props);
     }
 
     public function uploadFiles($dosyalar)
@@ -120,25 +119,24 @@ class LetterController extends Controller
     }
 
     // Generate PDF
+    // public function pdf()
+    // {
+    // $letter = $this->letter;
+    // retreive all records from db
+    // share data to view
+    //view()->share('view', $this->letter);
+    // $pdf = PDF::loadView('pdf', compact('letter'));
+
+    // $pdf->setPaper('A4', 'portrait');
+    // dd($pdf);
+    // download PDF file with download method
+    // return $pdf->download('pdf_file.pdf');
+    // }
+
     public function pdf()
     {
-        $letter = $this->letter;
-        // retreive all records from db
-        // share data to view
-        //view()->share('view', $this->letter);
-        $pdf = PDF::loadView('pdf', compact('letter'));
-
-        $pdf->setPaper('A4', 'portrait');
-        // dd($pdf);
-        // download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
-    }
-
-    public function viewPdfHtml()
-    {
-        return view('pdf', [
+        return view('letter.pdf-view', [
             'letter' => $this->letter,
-            'message' => $this->notification,
         ]);
     }
 }

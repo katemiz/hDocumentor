@@ -35,6 +35,16 @@ class Letter extends Model
     }
 
 
+    protected function letterno(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) =>'B'.$this->created_at->format('Ym').'-'.$this->id
+        );
+    }
+
+    protected function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 
 
 }

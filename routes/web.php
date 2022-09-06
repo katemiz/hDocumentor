@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LetterController;
 use App\Http\Livewire\CompanyActions;
 use App\Http\Livewire\LetterActions;
+use App\Http\Livewire\LetterList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     // LETTER
     Route::get('/letter/{id}', [LetterController::class, 'view'])->name('view');
     Route::get('/letter-gui/{id?}', LetterActions::class);
+    Route::get('/letter-list', LetterList::class);
 
     Route::post('/letter-dbact/{id?}', [LetterController::class, 'dbact']);
     Route::get('/letter-pdf/{id}', [LetterController::class, 'pdf']);

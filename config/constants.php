@@ -23,4 +23,5 @@ return [
     ],
 
     'favicon' => '/images/favicon.svg',
+    'results_per_page' => 10,
 ];

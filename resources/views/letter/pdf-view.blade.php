@@ -1,22 +1,36 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link  rel="icon" type="image/svg+xml" href="{{ asset(Config::get('constants.favicon')) }}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link  href="{{ asset('/css/css.css') }}" rel="stylesheet" />
+    <link  href="{{ asset('/css/bulma.css') }}" rel="stylesheet" />
+
+    <style>
+
+
+@media print {
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
+    </style>
+
+  </head>
+  <body>
+
     <section class="section container">
 
-        @if ($letter->notification)
-        {{$letter->notification->msg}}
-        @endif
-
-        <a href="/letter-gui/{{$letter->id}}">Edit</a>
-        <a href="/letter-pdf/{{$letter->id}}">PDF</a>
 
 
 
-        <header class="mb-6 has-background-light">
-
-            <p class="has-text-grey mt-6 pb-6 px-1">kapkara mühendislik danışmanlık</p>
+        <div class="column">
 
 
+        <h1 class="title has-text-dark">kapkara mühendislik danışmanlık</h1>
+        </div>
 
-        </header>
 
         <div class="column">
 
@@ -34,6 +48,8 @@
 
             <div class="column has-text-right">
                 {!! QrCode::size(100)->generate(Request::url()); !!}
+                <br>
+                {{$letter->letterno}}
             </div>
 
         </div>
@@ -99,12 +115,14 @@
 
 
 
-        <footer class="has-background-light">
 
-            <p class="has-text-grey mt-6 pt-6 px-1">B{{$letter->id}}</p>
-        </footer>
 
 
     </section>
-</x-app-layout>
+
+  </body>
+</html>
+
+
+
 

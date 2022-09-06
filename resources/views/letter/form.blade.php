@@ -67,6 +67,13 @@
 
         </div>
 
+        <div class="field">
+            <label class="label">Subject</label>
+            <div class="control">
+                <input class="input" type="text" name="subject" placeholder="Subject of letter" value="{{$letter ? $letter->subject:''}}">
+            </div>
+        </div>
+
         <div class="field" wire:ignore>
             <input type="hidden" name="editor_data" id="ckeditor" value="{{$letter ? $letter->content :''}}">
             <label class="label">Letter Main Content</label>

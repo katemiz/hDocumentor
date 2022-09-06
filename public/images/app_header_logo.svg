@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -42,9 +42,9 @@
      inkscape:window-height="1007"
      id="namedview4291"
      showgrid="false"
-     inkscape:zoom="1.359"
-     inkscape:cx="360.2092"
-     inkscape:cy="80"
+     inkscape:zoom="1.5802326"
+     inkscape:cx="430"
+     inkscape:cy="54.68727"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -65,19 +65,26 @@
      style="font-style:normal;font-weight:normal;font-size:40px;line-height:0%;font-family:sans-serif;letter-spacing:1.42999995px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="text4942"
      transform="translate(173.64291,122.46142)" />
+  <rect
+     style="opacity:0.97000002;fill:#363636;fill-opacity:1;stroke:none;stroke-width:4.48800182;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect1499"
+     width="1000"
+     x="0"
+     y="-7.1054274e-15"
+     height="160" />
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none"
-     x="-12.117346"
-     y="136.72"
+     x="32.066673"
+     y="126.66666"
      id="text5201"><tspan
        sodipodi:role="line"
        id="tspan5199"
-       x="-12.117346"
-       y="136.72"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:160px;font-family:Simplifica;-inkscape-font-specification:Simplifica;letter-spacing:-16.35000038px"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:160px;font-family:Ailerons;-inkscape-font-specification:Ailerons;letter-spacing:-16.35000038px"
-         id="tspan4089"><tspan
-   style="fill:#ff0000"
-   id="tspan4128">H</tspan>Documentor</tspan></tspan></text>
+       x="32.066673"
+       y="126.66666"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:133.33332825px;font-family:Ailerons;-inkscape-font-specification:Ailerons;letter-spacing:-16.35000038px"><tspan
+         style="font-size:133.33332825px;fill:#ff0000"
+         id="tspan4128">H</tspan><tspan
+         style="font-size:133.33332825px;fill:#00d700;fill-opacity:1"
+         id="tspan1501">Documentor</tspan></tspan></text>
 </svg>
