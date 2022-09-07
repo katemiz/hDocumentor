@@ -6,9 +6,9 @@
     <link  rel="icon" type="image/svg+xml" href="{{ asset(Config::get('constants.favicon')) }}" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    {{-- <link  href="{{ asset('/css/app.css') }}" rel="stylesheet" /> --}}
-    <link  href="{{ asset('/css/css.css') }}" rel="stylesheet" />
 
+    <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
+    <link  href="{{ asset('/css/css.css') }}" rel="stylesheet" />
     <link  href="{{ asset('/css/bulma.css') }}" rel="stylesheet" />
 
     @livewireStyles

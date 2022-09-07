@@ -83,29 +83,32 @@ class LetterList extends Component
 
     public $has_actions = true;
 
-    public $sortDirection = 'asc';
-    public $sortTimeDirection = 'desc';
+    public $sortColumn = 'id';
+    public $sortDirection = 'desc';
+
+    protected $listeners = [
+        'delete' => 'deleteLetter',
+    ];
 
     use WithPagination;
-
-    public function mount()
-    {
-        // $this->columns = (object) $this->columns;
-        // $this->permitted_to = (object) $this->permitted_to;
-
-        // $letter = new Letter();
-
-        // $columns = Schema::getColumnListing($letter->getTable());
-
-        // dd($columns);
-    }
 
     public function render()
     {
         return view('letter.list', [
-            'letters' => Letter::where('id', 1)->paginate(
-                Config::get('constants.results_per_page')
-            ),
+            'letters' => Letter::orderBy(
+                $this->sortColumn,
+                $this->sortDirection
+            )->paginate(Config::get('constants.results_per_page')),
         ]);
+    }
+
+    public function sortBy($colname, $direction)
+    {
+        //dd('id');
+
+        $this->sortColumn = $colname;
+        $this->sortDirection = $direction;
+
+        $this->columns[$colname]['sdirection'] = $direction;
     }
 }

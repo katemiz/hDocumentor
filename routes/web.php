@@ -44,12 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/letter-list', LetterList::class);
 
     Route::post('/letter-dbact/{id?}', [LetterController::class, 'dbact']);
+    Route::get('/letter-delete/{id}', [LetterController::class, 'delete']);
     Route::get('/letter-pdf/{id}', [LetterController::class, 'pdf']);
 
-    Route::get('/letter-viewpdfhtml/{id}', [
-        LetterController::class,
-        'viewPdfHtml',
-    ]);
+    // Route::get('/letter-viewpdfhtml/{id}', [
+    //     LetterController::class,
+    //     'viewPdfHtml',
+    // ]);
 
     // COMPANY
     Route::get('/company/{id}', [CompanyController::class, 'view']);

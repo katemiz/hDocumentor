@@ -118,6 +118,15 @@ class LetterController extends Controller
         ];
     }
 
+    public function deleteLetter()
+    {
+        Letter::find($this->idLetter)->update($this->props);
+
+        $this->notification = [
+            'status' => 'success',
+            'msg' => 'Letter has been updated successully',
+        ];
+    }
     // Generate PDF
     // public function pdf()
     // {

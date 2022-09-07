@@ -29,11 +29,11 @@
         </a>
         @endif
 
-        @if ($actions['delete']['status'])
-        <a href="{{$actions['delete']['route']}}{{$letter->id}}" class="icon">
+        {{-- @if ($actions['delete']['status'])
+        <a wire:click="$emit('triggerDelete',{{ $letter->id }})"  class="icon">
             <x-heroicon-o-trash class="has-text-danger"/>
         </a>
-        @endif
+        @endif --}}
 
     </td>
 @endif
