@@ -1,34 +1,30 @@
+<div class="column">
 
+    <div class="columns">
 
-    <div class="column">
+        <div class="column is-3">
 
-        <div class="columns">
+            @if ($letter->sender->logos)
 
-            <div class="column is-3">
+                @foreach ($letter->sender->logos as $logo)
+                    <img src="{{$logo->imgEncode($logo->stored_as)}}" />
+                @endforeach
 
-                @if ($letter->sender->logos)
+            @endif
 
-                    @foreach ($letter->sender->logos as $logo)
-                        <img src="{{$logo->imgEncode($logo->stored_as)}}" />
-                    @endforeach
+        </div>
 
-                @endif
-
-            </div>
-
-            <div class="column">
-                <h1 class="title has-text-weight-light has-text-right">
-                {{$letter->sender->fullname}}
-                </h1>
-            </div>
-
+        <div class="column">
+            <h1 class="title has-text-weight-light has-text-right">
+            {{$letter->sender->fullname}}
+            </h1>
         </div>
 
     </div>
 
+</div>
 
-    <div class="column">
-
+<div class="column">
     <div class="columns">
 
         <div class="column is-half">
@@ -47,74 +43,59 @@
         </div>
 
     </div>
-    </div>
+</div>
 
-
+@if ($letter->toCompany)
+<div class="column">
     @if ($letter->toCompany)
-
-    <div class="column">
-        @if ($letter->toCompany)
-            {{ $letter->toCompany }}
-        @endif
-
-        @if ($letter->toPerson)
-            <br>{{ $letter->toPerson }}
-        @endif
-    </div>
+        {{ $letter->toCompany }}
     @endif
 
-
-
-
-    <div class="column has-text-info">
-        {{$letter->tarih}}
-    </div>
-
-
-    @if ($letter->refarray)
-    <div class="column content">
-
-        References :
-        <ol>
-            @foreach ($letter->refarray as $ref)
-            <li>{{$ref}}</li>
-            @endforeach
-        </ol>
-        </div>
-    </div>
+    @if ($letter->toPerson)
+        <br>{{ $letter->toPerson }}
     @endif
+</div>
+@endif
 
+<div class="column has-text-info">
+    {{$letter->tarih}}
+</div>
 
-    @if ($letter->subject)
-    <div class="column content">
-
-        Subject
-        <span class="has-text-weight-bold has-text-info">{{$letter->subject }}</span>
-    </div>
-    @endif
-
-    <div class="column">
-        {!! $letter->content !!}
-    </div>
-
-
-    @if ($letter->dosyalar)
-    <div class="column">
-
-        @foreach ($letter->dosyalar as $key => $dosya )
-            <p>
-                <span class="has-text-weight-bold">Attach {{ ++$key }}</span>
-                <span class="has-text-weight-light">{{$dosya->filename }}</span>
-            </p>
+@if ($letter->refarray)
+<div class="column content">
+    {{__('References')}}:
+    <ol>
+        @foreach ($letter->refarray as $ref)
+        <li>{{$ref}}</li>
         @endforeach
+    </ol>
     </div>
-    @endif
+</div>
+@endif
 
+@if ($letter->subject)
+<div class="column content">
+    {{__('Subject')}}:
+    <span class="has-text-weight-bold has-text-info">{{$letter->subject }}</span>
+</div>
+@endif
 
-    <div class="column mt-6">
-        {{$letter->letterno}}
-    </div>
+<div class="column">
+    {!! $letter->content !!}
+</div>
 
+@if ($letter->dosyalar)
+<div class="column">
 
+    @foreach ($letter->dosyalar as $key => $dosya )
+        <p>
+            <span class="has-text-weight-bold">Attach {{ ++$key }}</span>
+            <span class="has-text-weight-light">{{$dosya->filename }}</span>
+        </p>
+    @endforeach
+</div>
+@endif
 
-
+<div class="column mt-6">
+    {{$letter->letterno}}
+</div>

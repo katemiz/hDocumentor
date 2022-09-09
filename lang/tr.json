@@ -41,5 +41,21 @@
   "If you did not request a password reset, no further action is required.": "Bu istek sizin değilse, her hangi bir şey yapmaya gerek yok.",
   "Reset Password Notification": "Şifre Değiştirme Bildirimi",
 
-  "Reset Password": "Şifre Değiştir"
+  "Reset Password": "Şifre Değiştir",
+
+  "Subject": "Konu",
+  "Ref": "İlgi",
+  "References": "İlgi",
+  "Sender Company": "Yazıyı Gönderen Kurum",
+  "Select Sender Company": "Yazıyı Gönderen Kurumu Seçiniz",
+  "To Company": "Gönderilen Kurum/Firma",
+  "To company name": "Kurum/firma adı",
+  "To Person": "Gönderilen Kişi",
+  "To person name": "Gönderilen kişinin ismi/unvanı",
+  "Letter Content": "Yazı İçeriği",
+  "Attachments": "Ekler",
+  "Files": "Dosyalar",
+  "Available Files": "Yüklenmiş Dosyalar",
+  "No new files yet!": "Yeni dosya yoktur.",
+  "No file yet!": "Yeni dosya yoktur."
 }

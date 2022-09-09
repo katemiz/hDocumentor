@@ -87,13 +87,15 @@
 
               @if(Auth::check())
 
+                <a href="{{ route('lang.switch', 'tr') }}" class="navbar-item is-small {{ app()->getLocale() == 'tr' ? 'has-background-warning':''}}">TR</a>
+                <a href="{{ route('lang.switch', 'en') }}" class="navbar-item {{ app()->getLocale() == 'en' ? 'has-background-warning':''}}">EN</a>
+
                 <div class="navbar-item has-dropdown is-hoverable">
                     <p class="navbar-link">
                         {{ Auth::user()->name }}
                     </p>
 
                     <div class="navbar-dropdown">
-
 
                       <a  href="/projects" class="navbar-item">Settings</a>
                         <!-- Authentication -->

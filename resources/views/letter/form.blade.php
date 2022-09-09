@@ -21,11 +21,12 @@
 
 
         <div class="field">
-            <label class="label">Sender Company</label>
+            <label class="label">{{__('Sender Company')}}
+            </label>
             <div class="control">
                 <div class="select">
                     <select name="sender">
-                        <option>Select Sender Company</option>
+                        <option>{{__('Select Sender Company')}}</option>
 
                         @if (count($senders) == 1)
                             <option value="{{$senders['0']->id}}" selected>{{$senders['0']->fullname}}</option>
@@ -50,22 +51,22 @@
 
 
         <div class="field">
-            <label class="label">To Company </label>
+            <label class="label">{{__('To Company')}}</label>
             <div class="control">
-                <input class="input" type="text" name="to_company" placeholder="Text input" value="{{$letter ? $letter->toCompany:''}}">
+                <input class="input" type="text" name="to_company" placeholder="{{__('To company name')}}" value="{{$letter ? $letter->toCompany:''}}">
             </div>
         </div>
 
         <div class="field">
-            <label class="label">To Person </label>
+            <label class="label">{{__('To Person')}}</label>
             <div class="control">
-                <input class="input" type="text" name="to_person" placeholder="Text input" value="{{$letter ? $letter->toPerson:''}}">
+                <input class="input" type="text" name="to_person" placeholder="{{__('To person name')}}" value="{{$letter ? $letter->toPerson:''}}">
             </div>
         </div>
 
         <div class="field">
 
-            <label class="label">References
+            <label class="label">{{__('References')}}
                 <span class="icon-text">
                     <span class="icon">
                         <a wire:click="addRef">
@@ -78,7 +79,7 @@
 
             @for ($i = 1; $i <= $noOfReferences; $i++)
             <div class="control columns" id="refcontrol{{$i}}">
-                <div class="column is-narrow">Ref {{$i}}</div>
+                <div class="column is-narrow">{{__('Ref')}} {{$i}}</div>
                 <div class="column">
                     <input class="input" type="text" name="references[]" placeholder="Reference text"  value="{{isset($letter->refarray[$i-1]) ? $letter->refarray[$i-1]:''}}">
                 </div>
@@ -98,7 +99,7 @@
         </div>
 
         <div class="field">
-            <label class="label">Subject</label>
+            <label class="label">{{__('Subject')}}</label>
             <div class="control">
                 <input class="input" type="text" name="subject" placeholder="Subject of letter" value="{{$letter ? $letter->subject:''}}">
             </div>
@@ -106,11 +107,11 @@
 
         <div class="field" wire:ignore>
             <input type="hidden" name="editor_data" id="ckeditor" value="{{$letter ? $letter->content :''}}">
-            <label class="label">Letter Main Content</label>
+            <label class="label">{{__('Letter Content')}}</label>
             <div class="column" id="editor">{{$letter ? $letter->content :''}}</div>
         </div>
 
-        <x-file-upload label="Attachments" iconlabel="Files" :files="$letter ?  $letter->dosyalar :false" tcaption="Available Files" :ismultiple="true"/>
+        <x-file-upload label="{{__('Attachments')}}" iconlabel="{{__('Files')}}" :files="$letter ?  $letter->dosyalar :false" tcaption="{{__('Available Files')}}" :ismultiple="true"/>
 
         <div class="column has-text-right">
             <button type="submit" class="button is-link is-light">{{$letter ? 'Update Letter':'Save Letter'}}</button>
