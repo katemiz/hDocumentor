@@ -18,6 +18,17 @@ class Letter extends Model
         return $this->hasMany(Dosya::class);
     }
 
+    // public function sender()
+    // {
+    //     return $this->hasOne(Company::class);
+    // }
+
+    protected function sender(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => Company::find($this->company_id)
+        );
+    }
 
     protected function refarray(): Attribute
     {
@@ -25,7 +36,6 @@ class Letter extends Model
             get: fn ($value, $attributes) =>explode('::',$this->references)
         );
     }
-
 
     protected function tarih(): Attribute
     {

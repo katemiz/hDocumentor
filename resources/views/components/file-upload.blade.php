@@ -8,6 +8,10 @@
     <input type="hidden" id="filesToDelete" name="filesToDelete" value="0" autocomplete="off">
     <input type="hidden" id="filesToExclude" name="filesToExclude" value="0" autocomplete="off">
 
+    <div class="is-hidden" id="xmark_icon">
+        <x-heroicon-o-x-mark class="has-text-danger"/>
+    </div>
+
 
     @if ($files)
     <div class="column">
@@ -59,7 +63,7 @@
                     type="file"
                     name="dosyalar[]"
                     id="fupload"
-                    multiple
+                    {{$ismultiple ? 'multiple':''}}
                     onchange="getNames()" />
                 <span class="file-cta">
                     <span class="file-icon">
@@ -74,7 +78,9 @@
 
         <div class="column" id="filesList">
             <div class="notification is-warning is-light" id="noFile">
-                No new files yet!
+
+                {{$ismultiple ? 'No new files yet!':'No file yet!'}}
+
             </div>
         </div>
 

@@ -9,6 +9,7 @@ function confirmDelete(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       //window.livewire.emit('delete', id)
+      window.location.href = '/letter-delete/' + id
     } else {
       return false
     }

@@ -5,14 +5,9 @@
 
     <script>
         document.addEventListener('livewire:load', function () {
-            loadEditor(`Type the letter content here`)
+            loadEditor(`Type company address here`)
         })
-
-        function removeRef(no) {
-            document.getElementById('refcontrol'+no).remove()
-        }
     </script>
-
 
     <h1 class="title mb-6 has-text-weight-light is-size-1">{{$company ? 'Update Company':'New Company'}}</h1>
 
@@ -20,54 +15,90 @@
         @csrf
 
         <div class="field">
-            <label class="label">Company Name </label>
+
+            <label class="label">Company Type </label>
+
             <div class="control">
-                <input class="input" type="text" name="company_name" placeholder="Company Name" value="{{$company ? $company->toCompany:''}}">
+                <label class="radio">
+                <input type="radio" name="is_mycompany" value="1" {{$company->is_mycompany ? 'checked':''}}>
+                This is my company
+                </label>
+                <label class="radio">
+                <input type="radio" name="is_mycompany" value="0" {{!$company->is_mycompany ? 'checked':''}}>
+                No, this a company that we work with
+                </label>
             </div>
         </div>
 
+        <div class="columns">
 
-
-        <div class="field">
-            <label class="label">E-Mail (Offical Contact EMail/Person)</label>
-            <div class="control">
-                <input class="input" type="text" name="email" placeholder="E-Mail" value="{{$company ? $company->toPerson:''}}">
+            <div class="column is-4">
+            <div class="field">
+                <label class="label">Company Short Name </label>
+                <div class="control">
+                    <input class="input" type="text" name="shortname" placeholder="eg kapkara" value="{{$company ? $company->shortname:''}}">
+                </div>
             </div>
+            </div>
+
+            <div class="column is-4">
+            <div class="field">
+                <label class="label">Company Full Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="fullname" placeholder="eg kapkara Mühendislik Danışmanlık A.Ş" value="{{$company ? $company->fullname:''}}">
+                </div>
+            </div>
+            </div>
+
+            <div class="column is-4">
+            <div class="field">
+                <label class="label">Web Site URL</label>
+                <div class="control">
+                    <input class="input" type="text" name="website" placeholder="Web Site URL" value="{{$company ? $company->website:''}}">
+                </div>
+            </div>
+            </div>
+
         </div>
 
+        <div class="columns">
 
-        <div class="field">
-            <label class="label">Web Site URL</label>
-            <div class="control">
-                <input class="input" type="text" name="url" placeholder="Web Site URL" value="{{$company ? $company->toPerson:''}}">
+            <div class="column is-4">
+            <div class="field">
+                <label class="label">Contact Phone Number(s)</label>
+                <div class="control">
+                    <input class="input" type="text" name="phone" placeholder="eg +90 555 555 55 55" value="{{$company ? $company->phone:''}}">
+                </div>
             </div>
-        </div>
-
-
-        <div class="field">
-            <label class="label">Phone Number</label>
-            <div class="control">
-                <input class="input" type="text" name="phone" placeholder="Phone number" value="{{$company ? $company->toPerson:''}}">
             </div>
-        </div>
 
-
-        <div class="field">
-            <label class="label">Tax Number</label>
-            <div class="control">
-                <input class="input" type="text" name="tax_number" placeholder="Tax number" value="{{$company ? $company->toPerson:''}}">
+            <div class="column is-4">
+            <div class="field">
+                <label class="label">Contact E-Mail</label>
+                <div class="control">
+                    <input class="input" type="text" name="email" placeholder="eg info@important.company.com" value="{{$company ? $company->email:''}}">
+                </div>
             </div>
+            </div>
+
+            <div class="column is-4">
+                <div class="field">
+                    <label class="label">Company Tax Number</label>
+                    <div class="control">
+                        <input class="input" type="text" name="tax_no" placeholder="eg 242349943454" value="{{$company ? $company->tax_no:''}}">
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-
 
         <div class="field" wire:ignore>
-            <input type="hidden" name="editor_data" id="ckeditor" value="{{$company ? $company->content :''}}">
+            <input type="hidden" name="editor_data" id="ckeditor" value="{{$company ? $company->address :''}}">
             <label class="label">Address</label>
-            <div class="column" id="editor">{{$company ? $company->content :''}}</div>
+            <div class="column" id="editor">{{$company ? $company->address :''}}</div>
         </div>
 
-        <x-file-upload label="Attachments" iconlabel="Files" :files="$company ?  $company->dosyalar :false" tcaption="Available Files"/>
+        <x-file-upload label="Logo (png, jpg, svg)" iconlabel="Logo File" :files="$company ?  $company->logos :false" tcaption="Company Logo File" :ismultiple="false"/>
 
         <div class="column has-text-right">
             <button type="submit" class="button is-link is-light">{{$company ? 'Update Company':'Save Company'}}</button>

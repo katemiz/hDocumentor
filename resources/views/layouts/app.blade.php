@@ -7,7 +7,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-    <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
     <link  href="{{ asset('/css/css.css') }}" rel="stylesheet" />
     <link  href="{{ asset('/css/bulma.css') }}" rel="stylesheet" />
 

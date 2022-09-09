@@ -14,10 +14,40 @@
     </script>
 
 
-    <h1 class="title mb-6 has-text-weight-light is-size-1">{{$letter ? 'Update Company':'New Company'}}</h1>
+    <h1 class="title mb-6 has-text-weight-light is-size-1">{{$letter ? 'Update Letter':'New Letter'}}</h1>
 
     <form action="/letter-dbact{{$letter ? '/'.$letter->id:''}}" method="POST" enctype="multipart/form-data" >
         @csrf
+
+
+        <div class="field">
+            <label class="label">Sender Company</label>
+            <div class="control">
+                <div class="select">
+                    <select name="sender">
+                        <option>Select Sender Company</option>
+
+                        @if (count($senders) == 1)
+                            <option value="{{$senders['0']->id}}" selected>{{$senders['0']->fullname}}</option>
+                        @else
+
+                            @foreach ($senders as $sender)
+                                <option value="{{$sender->id}}" selected>{{$sender->fullname}}</option>
+                            @endforeach
+
+                        @endif
+
+                    </select>
+                  </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
 
         <div class="field">
             <label class="label">To Company </label>
@@ -80,10 +110,10 @@
             <div class="column" id="editor">{{$letter ? $letter->content :''}}</div>
         </div>
 
-        <x-file-upload label="Attachments" iconlabel="Files" :files="$letter ?  $letter->dosyalar :false" tcaption="Available Files"/>
+        <x-file-upload label="Attachments" iconlabel="Files" :files="$letter ?  $letter->dosyalar :false" tcaption="Available Files" :ismultiple="true"/>
 
         <div class="column has-text-right">
-            <button type="submit" class="button is-link is-light">{{$letter ? 'Update Company':'Save Company'}}</button>
+            <button type="submit" class="button is-link is-light">{{$letter ? 'Update Letter':'Save Letter'}}</button>
         </div>
 
     </form>

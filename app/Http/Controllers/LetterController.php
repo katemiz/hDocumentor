@@ -7,7 +7,6 @@ use App\Models\Letter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use PDF;
 
 class LetterController extends Controller
 {
@@ -28,6 +27,7 @@ class LetterController extends Controller
     {
         return view('letter.form', [
             'letter' => $this->letter,
+            'senders' => $this->senders,
         ]);
     }
 
@@ -49,8 +49,14 @@ class LetterController extends Controller
             $this->insertLetter();
         }
 
+        // Do we have files to be deleted ?
+        $this->deleteFiles($request->input('filesToDelete'));
+
         if ($request->has('dosyalar')) {
-            $this->uploadFiles($request->file('dosyalar'));
+            $this->uploadFiles(
+                $request->file('dosyalar'),
+                $request->input('filesToExclude')
+            );
         }
 
         return redirect()->route('view', [
@@ -61,6 +67,7 @@ class LetterController extends Controller
     public function readFormValues($request)
     {
         $this->props['user_id'] = Auth::id();
+        $this->props['company_id'] = $request->input('sender');
         $this->props['toCompany'] = $request->input('to_company');
         $this->props['toPerson'] = $request->input('to_person');
 
@@ -74,13 +81,24 @@ class LetterController extends Controller
         $this->props['content'] = $request->input('editor_data');
     }
 
-    public function uploadFiles($dosyalar)
+    public function uploadFiles($dosyalar, $toBeExcludedFiles)
     {
-        foreach ($dosyalar as $dosya) {
-            $filename = 'USR' . Auth::id() . '/' . date('YM');
-            $saved_dir = Storage::disk('local')->put($filename, $dosya);
+        $excludeFilesArray = false;
 
-            $this->saveFileRecord($dosya, $saved_dir);
+        if ($toBeExcludedFiles != 0) {
+            $excludeFilesArray = json_decode($toBeExcludedFiles);
+        }
+
+        foreach ($dosyalar as $dosya) {
+            if (
+                $excludeFilesArray &&
+                !in_array($dosya->getClientOriginalName(), $excludeFilesArray)
+            ) {
+                $filename = 'USR' . Auth::id() . '/' . date('YM');
+                $saved_dir = Storage::disk('local')->put($filename, $dosya);
+
+                $this->saveFileRecord($dosya, $saved_dir);
+            }
         }
     }
 
@@ -118,15 +136,45 @@ class LetterController extends Controller
         ];
     }
 
-    public function deleteLetter()
+    public function deleteLetter($id)
     {
-        Letter::find($this->idLetter)->update($this->props);
+        Letter::find($id)->delete();
+
+        // Do we have any attachments?
+        $dosyalar = Dosya::where('letter_id', '=', $id);
+
+        foreach ($dosyalar as $dosya) {
+            Storage::delete($dosya->stored_as); // Delete attachment from hard disk
+            Dosya::find($dosya->id)->delete($dosya->id); // Delete record from db
+        }
 
         $this->notification = [
             'status' => 'success',
-            'msg' => 'Letter has been updated successully',
+            'msg' => 'Letter has been deleted successully',
         ];
     }
+
+    function deleteFiles($fileIdDizinToDelete)
+    {
+        if ($fileIdDizinToDelete == 0) {
+            return true;
+        }
+
+        $idDizin = json_decode($fileIdDizinToDelete);
+
+        foreach ($idDizin as $id) {
+            $d = Dosya::find($id);
+
+            // Delete file from hard disk
+            Storage::delete($d->stored_as);
+
+            // delete item from db
+            $d->delete();
+        }
+
+        return true;
+    }
+
     // Generate PDF
     // public function pdf()
     // {

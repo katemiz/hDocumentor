@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\Company;
 use App\Models\Letter;
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +17,8 @@ return new class extends Migration {
     {
         Schema::create('dosyalar', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Letter::class);
+            $table->foreignIdFor(Letter::class)->nullable();
+            $table->foreignIdFor(Company::class)->nullable();
             $table->string('filename');
             $table->string('stored_as');
             $table->integer('size');

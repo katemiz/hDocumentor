@@ -33,7 +33,7 @@ function cancelFile(key, fname) {
   }
 
   if (filesToExclude.length > 0) {
-    document.getElementById('filesToExclude').value = filesToExclude.join()
+    document.getElementById('filesToExclude').value = filesToExclude.join('::')
   } else {
     document.getElementById('filesToExclude').value = ''
   }
@@ -51,6 +51,10 @@ function cancelFile(key, fname) {
 }
 
 function getNames() {
+  filesToExclude = []
+
+  let cancel_icon = document.getElementById('xmark_icon').innerHTML
+
   var newFiles = document.getElementById('fupload')
 
   if (Object.entries(newFiles.files).length < 1) {
@@ -72,6 +76,10 @@ function getNames() {
 
   dosyalar = []
 
+  if (document.getElementById('files_table')) {
+    document.getElementById('files_table').remove()
+  }
+
   let table = document.createElement('table')
   table.id = 'files_table'
   table.classList.add('table', 'is-fullwidth')
@@ -84,7 +92,11 @@ function getNames() {
             <td>${dosya.name}</td>
             <td>${dosya.size}</td>
             <td>${dosya.type}</td>
-            <td><a class="has-text-danger" onclick="cancelFile('${key}','${dosya.name}')">x</a></td>
+            <td>
+                <a class="has-text-danger" onclick="cancelFile('${key}','${dosya.name}')">
+                <span class="icon">${cancel_icon}</span>
+                </a>
+            </td>
         </tr>`
 
     dosyalar.push({ key: dosya })
