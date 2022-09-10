@@ -99,19 +99,18 @@ class CompanyController extends Controller
         $excludeFilesArray = [];
 
         if ($toBeExcludedFiles != 0) {
-            $excludeFilesArray = json_decode($toBeExcludedFiles);
+            $excludeFilesArray = explode('::', $toBeExcludedFiles);
         }
 
-        // dd($dosyalar);
         foreach ($dosyalar as $dosya) {
-            // if (
-            //     !in_array($dosya->getClientOriginalName(), $excludeFilesArray)
-            // ) {
-            $filename = 'USR' . Auth::id() . '/' . date('YM');
-            $saved_dir = Storage::disk('local')->put($filename, $dosya);
+            if (
+                !in_array($dosya->getClientOriginalName(), $excludeFilesArray)
+            ) {
+                $filename = 'USR' . Auth::id() . '/' . date('YM');
+                $saved_dir = Storage::disk('local')->put($filename, $dosya);
 
-            $this->saveFileRecord($dosya, $saved_dir);
-            // }
+                $this->saveFileRecord($dosya, $saved_dir);
+            }
         }
     }
 

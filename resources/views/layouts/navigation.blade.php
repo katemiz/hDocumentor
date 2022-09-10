@@ -20,36 +20,24 @@
 
         @if(Auth::check())
 
-           <a href="{{route('dashboard')}}" class="navbar-item">
-                Login Action 1
-            </a>
+
 
             <a href="/list-records/asset" class="navbar-item">
-                Login Action 2
+                Regulations
             </a>
 
+            <a href="/mom" class="navbar-item">eMoM</a>
+
             <div class="navbar-item has-dropdown is-hoverable">
-                <p class="navbar-link">Letter</p>
+                <p class="navbar-link">eMoM</p>
                 <div class="navbar-dropdown">
-                    <a href="/letter-gui" class="navbar-item">Add</a>
-                    <a href="/letter-list" class="navbar-item">List All</a>
+                    <a href="/mom-list" class="navbar-item">MoM</a>
+                    <a href="/ai-list" class="navbar-item">Action Item</a>
                 </div>
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <p class="navbar-link">Companies</p>
-                <div class="navbar-dropdown">
-                    <a href="/company-gui" class="navbar-item">Add</a>
-                    <a href="/company-list" class="navbar-item">List All</a>
-                </div>
-            </div>
-
-
-
-
-
-
-
+            <a href="/letter-list" class="navbar-item">Letters</a>
+            <a href="/company-list" class="navbar-item">Companies</a>
 
 
 
@@ -57,26 +45,6 @@
 
 
           @endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       </div>
 

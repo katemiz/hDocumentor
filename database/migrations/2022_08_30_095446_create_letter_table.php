@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('toPerson')->nullable();
             $table->string('subject')->nullable();
             $table->text('content')->nullable();
+            $table->string('status')->default('draft');
             $table->timestamps();
         });
     }

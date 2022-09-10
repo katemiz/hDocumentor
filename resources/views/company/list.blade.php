@@ -7,14 +7,14 @@
         <div class="column">
 
             <header class="mb-6">
-                <h1 class="title has-text-weight-light is-size-1">Letters</h1>
-                <h2 class="subtitle has-text-weight-light">Letters : Business, Private etc</h2>
+                <h1 class="title has-text-weight-light is-size-1">Companies</h1>
+                <h2 class="subtitle has-text-weight-light">My Company and All Other Companies</h2>
             </header>
         </div>
 
         <div class="column is-narrow">
 
-            <a href="/letter-gui" class="button is-link">
+            <a href="/company-gui" class="button is-link">
                 <span class="icon is-small">
                 <x-heroicon-o-plus-circle />
                 </span>
@@ -25,27 +25,27 @@
 
 
 
-    @if ($letters)
+    @if ($companies)
         <table class="table is-fullwidth">
 
-            <caption>Total number of letters <b>{{ $letters->total() }}</b> </caption>
+            <caption>Total number of companies <b>{{ $companies->total() }}</b> </caption>
 
             <x-table-head-row :columns="$columns" :hasaction="$has_actions" />
 
             <tbody>
 
-                @foreach ($letters as $letter)
-                <x-table-body-cell :letter="$letter" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
+                @foreach ($companies as $company)
+                <x-table-body-cell :letter="$company" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
                 @endforeach
 
             </tbody>
 
         </table>
 
-        {{ $letters->links()}}
+        {{ $companies->links()}}
 
     @else
-        <div class="notification is-warning is-light">No letters found</div>
+        <div class="notification is-warning is-light">No companies found</div>
     @endif
 
 

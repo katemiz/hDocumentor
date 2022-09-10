@@ -39,7 +39,11 @@
         <div class="column has-text-right">
             {!! QrCode::size(100)->generate(Request::url()); !!}
             <br>
-            {{$letter->letterno}}
+            @if ($letter->status == 'signed')
+                {{$letter->letterno}}
+            @else
+                {{strtoupper($letter->status)}}
+            @endif
         </div>
 
     </div>
@@ -89,7 +93,7 @@
 
     @foreach ($letter->dosyalar as $key => $dosya )
         <p>
-            <span class="has-text-weight-bold">Attach {{ ++$key }}</span>
+            <span class="has-text-weight-bold">{{__('Attach')}} {{ ++$key }}</span>
             <span class="has-text-weight-light">{{$dosya->filename }}</span>
         </p>
     @endforeach
@@ -97,5 +101,9 @@
 @endif
 
 <div class="column mt-6">
-    {{$letter->letterno}}
+    @if ($letter->status == 'signed')
+        {{$letter->letterno}}
+    @else
+        {{strtoupper($letter->status)}}
+    @endif
 </div>

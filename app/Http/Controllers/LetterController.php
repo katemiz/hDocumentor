@@ -35,7 +35,7 @@ class LetterController extends Controller
     {
         return view('letter.view', [
             'letter' => $this->letter,
-            'message' => $this->notification,
+            'notification' => $this->notification,
         ]);
     }
 
@@ -83,15 +83,14 @@ class LetterController extends Controller
 
     public function uploadFiles($dosyalar, $toBeExcludedFiles)
     {
-        $excludeFilesArray = false;
+        $excludeFilesArray = [];
 
         if ($toBeExcludedFiles != 0) {
-            $excludeFilesArray = json_decode($toBeExcludedFiles);
+            $excludeFilesArray = explode('::', $toBeExcludedFiles);
         }
 
         foreach ($dosyalar as $dosya) {
             if (
-                $excludeFilesArray &&
                 !in_array($dosya->getClientOriginalName(), $excludeFilesArray)
             ) {
                 $filename = 'USR' . Auth::id() . '/' . date('YM');
@@ -128,7 +127,7 @@ class LetterController extends Controller
 
     public function updateLetter()
     {
-        Letter::find($this->idLetter)->update($this->props);
+        $this->letter = Letter::find($this->idLetter)->update($this->props);
 
         $this->notification = [
             'status' => 'success',
@@ -175,25 +174,27 @@ class LetterController extends Controller
         return true;
     }
 
-    // Generate PDF
-    // public function pdf()
-    // {
-    // $letter = $this->letter;
-    // retreive all records from db
-    // share data to view
-    //view()->share('view', $this->letter);
-    // $pdf = PDF::loadView('pdf', compact('letter'));
-
-    // $pdf->setPaper('A4', 'portrait');
-    // dd($pdf);
-    // download PDF file with download method
-    // return $pdf->download('pdf_file.pdf');
-    // }
-
     public function pdf()
     {
         return view('letter.pdf-view', [
             'letter' => $this->letter,
+        ]);
+    }
+
+    public function sign()
+    {
+        $this->props['status'] = 'signed';
+
+        $this->updateLetter();
+
+        $this->notification = [
+            'status' => 'success',
+            'msg' => 'Letter has been signed successully',
+        ];
+
+        return view('letter.view', [
+            'letter' => $this->letter,
+            'notification' => $this->notification,
         ]);
     }
 }

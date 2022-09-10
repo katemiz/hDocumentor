@@ -3,7 +3,7 @@
 
         <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('/css/sweetalert2_min.css') }}">
-        <script src="{{ asset('/js/company.js') }}"></script>
+        <script src="{{ asset('/js/confirm.js') }}"></script>
 
         @if ($company->notification)
             {{$company->notification->msg}}
@@ -17,8 +17,7 @@
                 </span>
             </a>
 
-
-            <a class="ml-3" onclick="confirmDelete('{{$company->id}}')">
+            <a class="ml-3" onclick="confirmDelete('{{$company->id}}','company')">
                 <span class="icon is-small">
                     <x-heroicon-s-trash class="has-text-danger"/>
                 </span>

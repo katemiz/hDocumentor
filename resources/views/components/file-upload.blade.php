@@ -78,7 +78,6 @@
 
         <div class="column" id="filesList">
             <div class="notification is-warning is-light" id="noFile">
-
                 {{$ismultiple ? __('No new files yet!'):__('No file yet!')}}
             </div>
         </div>

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\MoMController;
 use App\Http\Livewire\CompanyForm;
+use App\Http\Livewire\CompanyList;
 use App\Http\Livewire\LetterForm;
 use App\Http\Livewire\LetterList;
 use Illuminate\Support\Facades\Route;
@@ -44,13 +46,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/letter-dbact/{id?}', [LetterController::class, 'dbact']);
     Route::get('/letter-delete/{id}', [LetterController::class, 'delete']);
     Route::get('/letter-pdf/{id}', [LetterController::class, 'pdf']);
+    Route::get('/letter-sign/{id}', [LetterController::class, 'sign']);
 
     // COMPANY
     Route::get('/company/{id}', [CompanyController::class, 'view'])->name(
         'cview'
     );
     Route::get('/company-gui/{id?}', CompanyForm::class);
-
+    Route::get('/company-list', CompanyList::class);
     Route::post('/company-dbact/{id?}', [CompanyController::class, 'dbact']);
-    Route::get('/company-pdf/{id}', [CompanyController::class, 'pdf']);
+
+    // MOM
+    Route::get('/mom', [MoMController::class, 'greet']);
 });

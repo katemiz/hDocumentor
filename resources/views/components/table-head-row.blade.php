@@ -25,6 +25,7 @@
         @endforeach
 
         @if ($hasaction)
+            <th class="has-text-center">Status</th>
             <th class="has-text-right is-2">Actions</th>
         @endif
     </tr>
