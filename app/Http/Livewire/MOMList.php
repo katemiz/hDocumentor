@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Letter;
+use App\Models\Mom;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
 
 use Livewire\WithPagination;
 
-class LetterList extends Component
+class MOMList extends Component
 {
     public $columns = [
         'id' => [
@@ -18,34 +18,21 @@ class LetterList extends Component
             'html' => false,
             'header' => 'ID',
         ],
-        'toCompany' => [
-            'show' => true,
-            'sort' => true,
-            'sdirection' => 'asc',
-            'html' => false,
-            'header' => 'To Company',
-        ],
-        'toPerson' => [
-            'show' => true,
-            'sort' => true,
-            'html' => false,
-            'sdirection' => 'asc',
-            'header' => 'To Person',
-        ],
         'subject' => [
             'show' => true,
             'sort' => true,
+            'sdirection' => 'asc',
+            'html' => false,
+            'header' => 'Subject',
+        ],
+        'place' => [
+            'show' => true,
+            'sort' => true,
             'html' => false,
             'sdirection' => 'asc',
-            'header' => 'Letter Subject',
+            'header' => 'Place',
         ],
-        'content' => [
-            'show' => false,
-            'sort' => true,
-            'html' => true,
-            'sdirection' => 'asc',
-            'header' => 'Letter Content',
-        ],
+
         'created_at' => [
             'show' => false,
             'sort' => true,
@@ -65,19 +52,19 @@ class LetterList extends Component
     public $permitted_to = [
         'view' => [
             'status' => true,
-            'route' => '/letter/',
+            'route' => '/mom/',
         ],
         'edit' => [
             'status' => true,
-            'route' => '/letter-gui/',
+            'route' => '/mom-gui/',
         ],
         'delete' => [
             'status' => true,
-            'route' => '/letter-delete/',
+            'route' => '/mom-delete/',
         ],
         'download' => [
             'status' => true,
-            'route' => '/letter/',
+            'route' => '/mom/',
         ],
     ];
 
@@ -94,8 +81,8 @@ class LetterList extends Component
 
     public function render()
     {
-        return view('letter.list', [
-            'letters' => Letter::orderBy(
+        return view('mom.mom-list', [
+            'moms' => Mom::orderBy(
                 $this->sortColumn,
                 $this->sortDirection
             )->paginate(Config::get('constants.results_per_page')),

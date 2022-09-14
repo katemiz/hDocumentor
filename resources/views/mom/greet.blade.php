@@ -14,14 +14,14 @@
                       eMoMs
                     </p>
                     <ul class="menu-list">
-                      <li><a>Create</a></li>
-                      <li class="is-active"><a>List</a></li>
+                      <li><a href="/mom-gui">Create</a></li>
+                      <li class="is-active"><a href="/mom-list">List</a></li>
                     </ul>
                     <p class="menu-label">
                       Action Items
                     </p>
                     <ul class="menu-list">
-                      <li><a>Create</a></li>
+                      <li><a href="/ai-gui">Create</a></li>
                       <li><a>List</a></li>
 
                     </ul>

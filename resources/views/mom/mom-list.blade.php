@@ -7,14 +7,14 @@
         <div class="column">
 
             <header class="mb-6">
-                <h1 class="title has-text-weight-light is-size-1">Letters</h1>
-                <h2 class="subtitle has-text-weight-light">Letters : Business, Private etc</h2>
+                <h1 class="title has-text-weight-light is-size-1">MOMs</h1>
+                <h2 class="subtitle has-text-weight-light">List of Minutes of Meetings</h2>
             </header>
         </div>
 
         <div class="column is-narrow">
 
-            <a href="/letter-gui" class="button is-link">
+            <a href="/mom-gui" class="button is-link">
                 <span class="icon is-small">
                 <x-heroicon-o-plus-circle />
                 </span>
@@ -25,27 +25,27 @@
 
 
 
-    @if ($letters)
+    @if ($moms)
         <table class="table is-fullwidth">
 
-            <caption>Total number of letters <b>{{ $letters->total() }}</b> </caption>
+            <caption>Total number of MOMs <b>{{ $moms->total() }}</b> </caption>
 
             <x-table-head-row :columns="$columns" :hasaction="$has_actions" />
 
             <tbody>
 
-                @foreach ($letters as $letter)
-                <x-table-body-cell :item="$letter" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
+                @foreach ($moms as $mom)
+                <x-table-body-cell :item="$mom" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
                 @endforeach
 
             </tbody>
 
         </table>
 
-        {{ $letters->links()}}
+        {{ $moms->links()}}
 
     @else
-        <div class="notification is-warning is-light">No letters found</div>
+        <div class="notification is-warning is-light">No MOM found</div>
     @endif
 
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Letter;
+use App\Models\ActionItem;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
 
 use Livewire\WithPagination;
 
-class LetterList extends Component
+class AIList extends Component
 {
     public $columns = [
         'id' => [
@@ -18,34 +18,22 @@ class LetterList extends Component
             'html' => false,
             'header' => 'ID',
         ],
-        'toCompany' => [
+        'description' => [
             'show' => true,
             'sort' => true,
             'sdirection' => 'asc',
-            'html' => false,
-            'header' => 'To Company',
-        ],
-        'toPerson' => [
-            'show' => true,
-            'sort' => true,
-            'html' => false,
-            'sdirection' => 'asc',
-            'header' => 'To Person',
-        ],
-        'subject' => [
-            'show' => true,
-            'sort' => true,
-            'html' => false,
-            'sdirection' => 'asc',
-            'header' => 'Letter Subject',
-        ],
-        'content' => [
-            'show' => false,
-            'sort' => true,
             'html' => true,
-            'sdirection' => 'asc',
-            'header' => 'Letter Content',
+            'header' => 'Description',
         ],
+
+        'duedate' => [
+            'show' => true,
+            'sort' => true,
+            'sdirection' => 'asc',
+            'html' => false,
+            'header' => 'Due Date',
+        ],
+
         'created_at' => [
             'show' => false,
             'sort' => true,
@@ -65,19 +53,19 @@ class LetterList extends Component
     public $permitted_to = [
         'view' => [
             'status' => true,
-            'route' => '/letter/',
+            'route' => '/ai/',
         ],
         'edit' => [
             'status' => true,
-            'route' => '/letter-gui/',
+            'route' => '/ai-gui/',
         ],
         'delete' => [
             'status' => true,
-            'route' => '/letter-delete/',
+            'route' => '/ai-delete/',
         ],
         'download' => [
             'status' => true,
-            'route' => '/letter/',
+            'route' => '/ai/',
         ],
     ];
 
@@ -94,8 +82,8 @@ class LetterList extends Component
 
     public function render()
     {
-        return view('letter.list', [
-            'letters' => Letter::orderBy(
+        return view('mom.ai-list', [
+            'ais' => ActionItem::orderBy(
                 $this->sortColumn,
                 $this->sortDirection
             )->paginate(Config::get('constants.results_per_page')),

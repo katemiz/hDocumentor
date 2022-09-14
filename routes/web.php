@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MoMController;
+use App\Http\Livewire\AIForm;
+use App\Http\Livewire\AIList;
 use App\Http\Livewire\CompanyForm;
 use App\Http\Livewire\CompanyList;
 use App\Http\Livewire\LetterForm;
 use App\Http\Livewire\LetterList;
+use App\Http\Livewire\MOMForm;
+use App\Http\Livewire\MOMList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,5 +62,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/company-dbact/{id?}', [CompanyController::class, 'dbact']);
 
     // MOM
-    Route::get('/mom', [MoMController::class, 'greet']);
+    Route::get('/mom-greet', [MoMController::class, 'greet'])->name('mom');
+
+    Route::get('/mom/{id}', [MoMController::class, 'view'])->name('momview');
+    Route::get('/mom-gui/{idMOM?}', MOMForm::class);
+    Route::post('/mom-dbact/{id?}', [MoMController::class, 'dbact']);
+    Route::get('/mom-list', MOMList::class);
+
+    // AI
+    Route::get('/ai/{id?}', [AIController::class, 'view'])->name('aiview');
+    Route::get('/ai-gui/{id?}', AIForm::class);
+    Route::get('/mom-ai-gui/{idMOM}/{id?}', AIForm::class);
+    Route::post('/ai-dbact/{idMOM}/{id?}', [AIController::class, 'dbact']);
+    Route::get('/ai-delete/{id}', [AIController::class, 'delete']);
+    Route::get('/ai-list', AIList::class);
 });

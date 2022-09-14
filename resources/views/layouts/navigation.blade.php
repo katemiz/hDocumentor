@@ -26,18 +26,20 @@
                 Regulations
             </a>
 
-            <a href="/mom" class="navbar-item">eMoM</a>
+            <a href="/mom-greet" class="navbar-item">eMoM</a>
+            <a href="/ai-list" class="navbar-item">AI</a>
+            <a href="/letter-list" class="navbar-item">Letter</a>
+
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <p class="navbar-link">eMoM</p>
+                <p class="navbar-link">Settings</p>
                 <div class="navbar-dropdown">
+                    <a href="/company-list" class="navbar-item">Companies</a>
                     <a href="/mom-list" class="navbar-item">MoM</a>
                     <a href="/ai-list" class="navbar-item">Action Item</a>
                 </div>
             </div>
 
-            <a href="/letter-list" class="navbar-item">Letters</a>
-            <a href="/company-list" class="navbar-item">Companies</a>
 
 
 

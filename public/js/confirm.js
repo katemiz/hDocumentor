@@ -1,13 +1,22 @@
 function confirmDelete(id, tur) {
   let title
+  let redirect
 
   switch (tur) {
     case 'letter':
       title = 'Delete Letter ?'
+      redirect = '/letter-delete/' + id
       break
 
     case 'company':
       title = 'Delete Company ?'
+      redirect = '/company-delete/' + id
+
+      break
+
+    case 'aitem':
+      title = 'Delete Action Item ?'
+      redirect = '/ai-delete/' + id
       break
   }
 
@@ -18,10 +27,10 @@ function confirmDelete(id, tur) {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
+    confirmButtonText: 'Delete',
   }).then((result) => {
     if (result.isConfirmed) {
-      //window.livewire.emit('delete', id)
-      window.location.href = '/letter-delete/' + id
+      window.location.href = redirect
     } else {
       return false
     }

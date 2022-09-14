@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\ActionItem;
-use App\Models\Company;
-use App\Models\Letter;
 use App\Models\Mom;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,16 +14,15 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('dosyalar', function (Blueprint $table) {
+        Schema::create('aitems', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Letter::class)->nullable();
-            $table->foreignIdFor(Company::class)->nullable();
+            $table->foreignIdFor(User::class);
             $table->foreignIdFor(Mom::class)->nullable();
-            $table->foreignIdFor(ActionItem::class)->nullable();
-            $table->string('filename');
-            $table->string('stored_as');
-            $table->integer('size');
-            $table->string('mimetype');
+            $table->text('description')->nullable();
+            $table->date('duedate')->nullable();
+            $table->string('resp_company')->nullable();
+            $table->string('resp_person')->nullable();
+            $table->string('status')->default('verbatim');
             $table->timestamps();
         });
     }
@@ -37,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('dosyalar');
+        Schema::dropIfExists('aitems');
     }
 };
