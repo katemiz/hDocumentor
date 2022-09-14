@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Binder extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+    protected $table = 'binders';
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
+}

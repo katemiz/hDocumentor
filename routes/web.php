@@ -4,6 +4,7 @@ use App\Http\Controllers\AIController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MoMController;
+use App\Http\Controllers\TreeController;
 use App\Http\Livewire\AIForm;
 use App\Http\Livewire\AIList;
 use App\Http\Livewire\CompanyForm;
@@ -12,6 +13,7 @@ use App\Http\Livewire\LetterForm;
 use App\Http\Livewire\LetterList;
 use App\Http\Livewire\MOMForm;
 use App\Http\Livewire\MOMList;
+use App\Http\Livewire\Tree;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,4 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ai-dbact/{idMOM}/{id?}', [AIController::class, 'dbact']);
     Route::get('/ai-delete/{id}', [AIController::class, 'delete']);
     Route::get('/ai-list', AIList::class);
+
+    // TREE
+
+    Route::get('/tree', Tree::class)->name('tree');
 });

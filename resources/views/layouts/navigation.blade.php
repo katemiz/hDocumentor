@@ -22,9 +22,9 @@
 
 
 
-            <a href="/list-records/asset" class="navbar-item">
-                Regulations
-            </a>
+            <a href="/list-records/asset" class="navbar-item">Regulations</a>
+            <a href="/list-records/asset" class="navbar-item">Requirements</a>
+
 
             <a href="/mom-greet" class="navbar-item">eMoM</a>
             <a href="/ai-list" class="navbar-item">AI</a>
@@ -39,6 +39,9 @@
                     <a href="/ai-list" class="navbar-item">Action Item</a>
                 </div>
             </div>
+
+            <a href="/tree" class="navbar-item">Tree</a>
+
 
 
 
