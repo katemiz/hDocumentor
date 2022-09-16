@@ -1,30 +1,95 @@
 
 <section class="section container">
 
-    <ul tree-root="reorder">
+    {{-- <ul tree-root="reorder2">
         @foreach ($chapters as $chapter)
 
-            <li tree-branch="{{$chapter->id}}" wire:key="{{$chapter->id}}" draggable="true" class="box my-1" >
+            <li tree-branch="A{{$chapter->id}}" wire:key="{{$chapter->id}}" draggable="true" class="box my-1" >
                 {{$chapter->id}} {{$chapter->content}}
             </li>
 
         @endforeach
-    </ul>
-
-    {{-- @php
-        print_r($chapters)
-    @endphp
-    --}}
-
-    @foreach ($chapters as $chapter)
-
-    <h1>{{$chapter->id}}</h1>
-        {{-- <p>{{$chapter->content}}</p>
-        <p>{{$chapter->parent}}</p> --}}
+    </ul> --}}
 
 
-    @endforeach
 
+
+    <div class='content'>
+        <h3 class='subtitle'>
+             Chapters
+        </h3>
+
+        @if($dizin && count($dizin) >0)
+
+
+
+            <ul class="" tree-root="reorder">
+                @foreach($dizin as $k => $branch)
+                    <li
+                        class="nobullet"
+                        order="ORDER {{$k}}"
+                        tree-branch="{{$branch['id']}}"
+                        wire:key="{{$branch['id']}}"
+                        parentId="{{$branch['parent_id']}}"
+                        draggable="true">
+
+                        <span id="Span{{$branch['id']}}">
+                        {{$branch['id']}} - {{$branch['content']}} ORDER {{$k}} PARENT {{$branch['parent_id']}}
+                        </span>
+                        @if($branch['children'])
+                            <x-tree-branch :branches="$branch['children']" />
+                        @endif
+            </li>
+                @endforeach
+                </ul>
+
+
+
+
+
+            {{-- <x-tree-branch :branches="$dizin" istop="{{true}}" /> --}}
+
+        @endif
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <hr>
+
+    <div class="content has-background-warning">
+
+        <ul>
+            <li>1. sdnfsdjfnsd sfsdnfjsdn 92234 ffık sdknfsdfsdf
+                <ul>
+                    <li>4. sdfksdmkf sdfksdkfd sdnfsdjfnsd sfsdnfjsdn 92234 ffık sdknfsdfsdf </li>
+                    <li>5. sdfsd 456456sdfksdmkf sdfksdkfd sdnfsdjfnsd sfsdnfjsdn 92234 ffık sdknfsdfsdf </li>
+
+
+                </ul>
+            </li>
+            <li>2. 4444444444 444 sdnfsdjfnsd sfsdnfjsdn 92234 ffık sdknfsdfsdf</li>
+            <li>3. fjdfjsdıjfısd4444444444 444 sdnfsdjfnsd sfsdnfjsdn 92234 ffık sdknfsdfsdf</li>
+
+        </ul>
+    </div>
 
     <script>
 
@@ -37,7 +102,7 @@
             })
 
             el.addEventListener('drop',e => {
-                e.target.classList.remove('has-background-info-light')
+                e.target.classList.remove('has-background-info-light','box','withborder')
 
                 let suruklenenEl = root.querySelector('[suruklenen]')
                 e.target.before(suruklenenEl)
@@ -53,12 +118,21 @@
 
                 let method = root.getAttribute('tree-root')
 
-                component.call(method,orderIds)
+                //component.call(method,orderIds)
+
+                console.log("Suruklenen parent id : ",suruklenenEl.getAttribute('parentId'))
+                console.log("Target parent id : ",e.target.getAttribute('parentId'))
+
             })
 
             el.addEventListener('dragenter',e => {
                 e.preventDefault()
-                e.target.classList.add('has-background-info-light')
+                e.target.classList.add('has-background-info-light','box','withborder')
+
+                let eSpan = document.getElementById('Span'+e.target.id)
+
+                console.log("ESPAN",e.target.id)
+
             })
 
             el.addEventListener('dragover',e => {
@@ -67,7 +141,7 @@
 
 
             el.addEventListener('dragleave',e => {
-                e.target.classList.remove('has-background-info-light')
+                e.target.classList.remove('has-background-info-light','box','withborder')
             })
 
 

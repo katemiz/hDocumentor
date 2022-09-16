@@ -54,14 +54,18 @@ class Tree extends Component
     {
         $chapters = Chapter::all();
 
+        $dizin = Chapter::convertToTree($chapters->toArray());
+
         // dd($chapters);
         return view('tree.index', [
             'chapters' => $chapters,
+            'dizin' => $dizin,
         ]);
     }
 
     public function reorder($idArray)
     {
-        dd($idArray);
+        // dd($idArray);
+        $aa = 1;
     }
 }

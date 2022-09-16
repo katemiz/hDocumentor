@@ -24,3 +24,11 @@
   border-top: 2px solid greenyellow;
   margin-top: 46px;
 }
+
+.nobullet {
+  list-style-type: none; /* Remove bullets */
+}
+
+.withborder {
+  border: 2px solid blue;
+}
