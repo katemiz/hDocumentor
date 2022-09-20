@@ -1,32 +1,32 @@
-{{-- <div class="my-0"  {{$istop ? 'tree-root="reorder"':''}}>
+@if ($istop)
+<div class="{{$istop ? '':'ml-4'}}" {{$istop ? 'tree-root':''}} >
+@endif
+
     @foreach($branches as $k => $branch)
-        <div class="ml-6 my-0" order="ORDER {{$k}}" tree-branch="{{$branch['id']}}" wire:key="{{$branch['id']}}" draggable="true">
-            {{$branch['id']}} - {{$branch['content']}} ORDER {{$k}}
+        <div
+            class="ml-4"
+            tree-branch="{{$branch['id']}}"
+            wire:key="{{$branch['id']}}"
+            parent={{$parent}}
+            draggable="true">
+
+            <span id="Icons{{$branch['id']}}" >
+                <span class="icon is-small" id="A{{$branch['id']}}"><a onclick="toggleBranch('{{$branch['id']}}')"><x-heroicon-o-chevron-right class="has-text-link"/></a></span>
+                <span class="icon is-small" id="B{{$branch['id']}}"><a onclick="toggleBranch('{{$branch['id']}}')"><x-heroicon-o-chevron-down class="has-text-link"/></a></span>
+                <span class="icon is-small" id="C{{$branch['id']}}"><x-heroicon-o-minus class="has-text-info"/></span>
+            <span>
+
+            <span>
+                {{$branch['id']}} - <a href="#" draggable="false">{{$branch['content']}}</a> ORDER {{$k}}
+            </span>
+
             @if($branch['children'])
-                <x-tree-branch :branches="$branch['children']" istop="{{false}}" />
+                <x-tree-branch :branches="$branch['children']" istop="{{false}}" parent="{{$branch['id']}}"/>
             @endif
         </div>
     @endforeach
-</div> --}}
 
-
-<ul class="">
-    @foreach($branches as $k => $branch)
-        <li
-            class="nobullet"
-            order="ORDER {{$k}}"
-            tree-branch="{{$branch['id']}}"
-            wire:key="{{$branch['id']}}"
-            parentId="{{$branch['parent_id']}}"
-            draggable="true">
-
-            <span id="Span{{$branch['id']}}">
-            {{$branch['id']}} - {{$branch['content']}} ORDER {{$k}}
-            </span>
-            @if($branch['children'])
-                <x-tree-branch :branches="$branch['children']" />
-            @endif
-        </li>
-    @endforeach
-</ul>
+@if ($istop)
+</div>
+@endif
 

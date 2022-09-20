@@ -32,3 +32,11 @@
 .withborder {
   border: 2px solid blue;
 }
+
+.topborder {
+  border-top: 2px solid blue;
+}
+
+.bottomborder {
+  border-bottom: 2px solid blue;
+}
