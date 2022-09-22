@@ -18,6 +18,11 @@ function confirmDelete(id, tur) {
       title = 'Delete Action Item ?'
       redirect = '/ai-delete/' + id
       break
+
+    case 'doctree':
+      title = 'Delete Doc Tree ?'
+      redirect = '/doctree-delete/' + id
+      break
   }
 
   Swal.fire({

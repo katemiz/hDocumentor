@@ -40,3 +40,8 @@
 .bottomborder {
   border-bottom: 2px solid blue;
 }
+
+.ck-editor__editable {
+  min-height: 250px !important;
+  max-height: 400px !important;
+}

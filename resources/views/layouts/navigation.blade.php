@@ -20,9 +20,7 @@
 
         @if(Auth::check())
 
-
-
-            <a href="/list-records/asset" class="navbar-item">Regulations</a>
+            <a href="/doctree-list" class="navbar-item">Regulations</a>
             <a href="/list-records/asset" class="navbar-item">Requirements</a>
 
 

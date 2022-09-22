@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Binder extends Model
+class DocTree extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = 'binders';
+    protected $table = 'doctrees';
 
     public function chapters()
     {

@@ -13,9 +13,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('binders', function (Blueprint $table) {
+        Schema::create('doctrees', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->text('title')->nullable();
+            $table->text('remarks')->nullable();
             $table->text('tree')->nullable();
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('binders');
+        Schema::dropIfExists('doctrees');
     }
 };

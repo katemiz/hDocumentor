@@ -2,18 +2,20 @@
 
 use App\Http\Controllers\AIController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DocTreeController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MoMController;
-use App\Http\Controllers\TreeController;
 use App\Http\Livewire\AIForm;
 use App\Http\Livewire\AIList;
 use App\Http\Livewire\CompanyForm;
 use App\Http\Livewire\CompanyList;
+use App\Http\Livewire\DocTreeForm;
 use App\Http\Livewire\LetterForm;
 use App\Http\Livewire\LetterList;
 use App\Http\Livewire\MOMForm;
 use App\Http\Livewire\MOMList;
 use App\Http\Livewire\Tree;
+use App\Http\Livewire\DocTreeList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,6 +82,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ai-list', AIList::class);
 
     // TREE
-
-    Route::get('/tree', Tree::class)->name('tree');
+    Route::get('/doctree-view/{id}', [DocTreeController::class, 'view'])->name(
+        'doctreeview'
+    );
+    Route::get('/doctree-list', DocTreeList::class)->name('dtlist');
+    Route::get('/doctree-form/{id?}', DocTreeForm::class);
+    Route::post('/doctree-db/{id?}', [DocTreeController::class, 'db']);
+    Route::get('/doctree-delete/{id}', [DocTreeController::class, 'delete']);
+    Route::get('/doctree-tree/{id}', Tree::class)->name('tree');
 });

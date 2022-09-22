@@ -1,10 +1,10 @@
-@if ($istop)
+{{-- @if ($istop)
 <div class="has-background-warning ml-4 py-4" tree-root >
-@endif
+@endif --}}
 
     @foreach($branches as $k => $branch)
         <div
-            class="ml-4 has-background-info my-4"
+            class="ml-4 my-4"
             tree-branch="{{$branch['id']}}"
             wire:key="{{$branch['id']}}"
             parent="{{$parent}}"
@@ -18,7 +18,7 @@
             </span>
 
             <span id="Text{{$branch['id']}}">
-                {{$branch['id']}} - <a href="#" draggable="false">{{$branch['content']}}</a> ORDER {{$k}}
+                {{$branch['id']}} - <a href="#" draggable="false">{{$branch['title']}}</a>
             </span>
 
             @if($branch['children'])
@@ -27,7 +27,7 @@
         </div>
     @endforeach
 
-@if ($istop)
+{{-- @if ($istop)
 </div>
-@endif
+@endif --}}
 
