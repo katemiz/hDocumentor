@@ -20,11 +20,11 @@
 
             <div class="control">
                 <label class="radio">
-                <input type="radio" name="is_mycompany" value="1" {{$company->is_mycompany ? 'checked':''}}>
+                <input type="radio" name="is_mycompany" value="1" {{$company && $company->is_mycompany ? 'checked':''}}>
                 This is my company
                 </label>
                 <label class="radio">
-                <input type="radio" name="is_mycompany" value="0" {{!$company->is_mycompany ? 'checked':''}}>
+                <input type="radio" name="is_mycompany" value="0" {{$company && !$company->is_mycompany ? 'checked':''}}>
                 No, this a company that we work with
                 </label>
             </div>

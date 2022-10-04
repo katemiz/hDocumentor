@@ -21,6 +21,8 @@
         <x-notification :notification="$notification" />
     @endif
 
+
+
     @if ($doctrees->total() > 0)
 
         <table class="table is-fullwidth">
@@ -32,7 +34,7 @@
             <tbody>
 
                 @foreach ($doctrees as $doctree)
-                <x-table-body-cell :item="$doctrees" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
+                <x-table-body-cell :item="$doctree" :columns="$columns" :hasaction="$has_actions" :actions="$permitted_to"/>
                 @endforeach
 
             </tbody>

@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\DocTree;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
-
 use Livewire\WithPagination;
 
 class DocTreeList extends Component
@@ -18,20 +17,20 @@ class DocTreeList extends Component
             'html' => false,
             'header' => 'ID',
         ],
-        'subject' => [
+        'title' => [
             'show' => true,
             'sort' => true,
             'sdirection' => 'asc',
             'html' => false,
             'header' => 'Subject',
         ],
-        'place' => [
-            'show' => true,
-            'sort' => true,
-            'html' => false,
-            'sdirection' => 'asc',
-            'header' => 'Place',
-        ],
+        // 'place' => [
+        //     'show' => true,
+        //     'sort' => true,
+        //     'html' => false,
+        //     'sdirection' => 'asc',
+        //     'header' => 'Place',
+        // ],
 
         'created_at' => [
             'show' => false,
@@ -52,19 +51,19 @@ class DocTreeList extends Component
     public $permitted_to = [
         'view' => [
             'status' => true,
-            'route' => '/mom/',
+            'route' => '/doctree-view/',
         ],
         'edit' => [
             'status' => true,
-            'route' => '/mom-gui/',
+            'route' => '/doctree-form/',
         ],
         'delete' => [
             'status' => true,
-            'route' => '/mom-delete/',
+            'route' => '/doctree-delete/',
         ],
         'download' => [
             'status' => true,
-            'route' => '/mom/',
+            'route' => '/doctree/',
         ],
     ];
 

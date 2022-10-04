@@ -1,21 +1,30 @@
 // let chapters = {!! json_encode($chapters) !!}
 
 // Add visibility and new_parent_id
+
 // chapters.forEach( (chapter,key,array) => {
 //     chapters[key].visibility = 'show'
 //     chapters[key].new_parent_id = chapter.parent_id
 // })
 
-let tree = []
+let visibility = []
 
-let root = document.querySelector('[tree-root]')
+// let tree = []
+
+let root = document.querySelector('[root]')
 
 let action // to identify move action: before, after or child
-let height // height of target element onto which dragged element is droped
+let height // height of target element onto which dragged element is dropped
 
 root.querySelectorAll('[tree-branch]').forEach((el) => {
   // Render all branch icons [open, closed or node]
   checkIcon(el)
+
+  console.log(visibility)
+
+  //   console.log(el.getAttribute('tree-branch'))
+
+  //   visibility[el.getAttribute('tree-branch')] = true
 
   el.addEventListener('dragstart', (e) => {
     let draggedEl = getDivElement(e.target)
@@ -32,8 +41,6 @@ root.querySelectorAll('[tree-branch]').forEach((el) => {
     let suruklenenEl = root.querySelector('[suruklenen]')
     suruklenenEl.classList.remove('has-background-light')
 
-    // console.log("chapters",chapters)
-
     let targetEl = getDivElement(e.target)
 
     if (action == 'before') {
@@ -45,48 +52,29 @@ root.querySelectorAll('[tree-branch]').forEach((el) => {
     }
 
     if (action == 'before' || action == 'after') {
-      // chapters.forEach ( (chapter,key) => {
-      //     if (chapter.id == suruklenenEl.getAttribute('tree-branch')) {
-
-      //         console.log("AAAAAA",targetEl.getAttribute('parent'))
-      //         chapters[key].new_parent_id = parseInt(targetEl.getAttribute('parent'))
-
-      //         console.log("BBBB",targetEl.getAttribute('parent'))
-
-      //     }
-      // })
-
       suruklenenEl.setAttribute('parent', targetEl.getAttribute('parent'))
     }
 
     if (action == 'child') {
       targetEl.append(suruklenenEl)
-
-      // chapters.forEach ( (chapter,key) => {
-
-      //     if (chapter.id == suruklenenEl.getAttribute('tree-branch')) {
-      //         chapters[key].new_parent_id = parseInt(targetElId)
-      //     }
-      // })
-
       suruklenenEl.setAttribute('parent', targetElId)
     }
 
     // Refresh livewire component
-    let component = Livewire.find(
-      e.target.closest('[wire\\:id]').getAttribute('wire:id'),
-    )
+    // let component = Livewire.find(
+    //   e.target.closest('[wire\\:id]').getAttribute('wire:id'),
+    // )
 
-    let orderIds = Array.from(root.querySelectorAll('[tree-branch]')).map(
-      (itemEl) => {
-        return {
-          id: itemEl.getAttribute('tree-branch'),
-          parent_id: itemEl.getAttribute('parent'),
-        }
-      },
-    )
+    // let orderIds = Array.from(root.querySelectorAll('[tree-branch]')).map(
+    //   (itemEl) => {
+    //     return {
+    //       id: itemEl.getAttribute('tree-branch'),
+    //       parent_id: itemEl.getAttribute('parent'),
+    //     }
+    //   },
+    // )
 
-    component.call('treeOrder', getTreeStructure(root))
+    // component.call('treeOrder', getTreeStructure(root))
 
     root.querySelectorAll('[tree-branch]').forEach((el) => {
       checkIcon(el)
@@ -139,13 +127,10 @@ function getTreeStructure(element, dizin = []) {
 
     let node = {
       id: el.getAttribute('tree-branch'),
-      parent_id: el.getAttribute('parent'),
     }
 
     if (childNodes.length > 0) {
       node.children = getTreeStructure(el)
-    } else {
-      node.children = false
     }
 
     dizin.push(node)
@@ -172,24 +157,69 @@ function toggleBranch(parentNo) {
       }
     }
   })
+
+  let a = document.getElementById('A' + parentNo)
+  let b = document.getElementById('B' + parentNo)
+
+  if (a.classList.contains('is-hidden')) {
+    a.classList.remove('is-hidden')
+  } else {
+    a.classList.add('is-hidden')
+  }
+
+  if (b.classList.contains('is-hidden')) {
+    b.classList.remove('is-hidden')
+  } else {
+    b.classList.add('is-hidden')
+  }
 }
 
 function checkIcon(el) {
   let nodeId = el.getAttribute('tree-branch')
   let children = Array.from(el.querySelectorAll('[tree-branch]'))
-  let iconsEl = document.getElementById('Icons' + nodeId)
 
-  let has_children = document.getElementById('A' + nodeId)
-  let no_children = document.getElementById('B' + nodeId)
-  let lone_node = document.getElementById('C' + nodeId)
+  //   let iconsEl = document.getElementById('Icons' + nodeId)
 
   if (children.length > 0) {
+    visibility.push({ id: nodeId, hasChildren: true, isvisible: true })
+
+    let has_children = document.getElementById('A' + nodeId)
+    let no_children = document.getElementById('B' + nodeId)
+
     has_children.classList.remove('is-hidden')
     no_children.classList.add('is-hidden')
-    lone_node.classList.add('is-hidden')
   } else {
-    has_children.classList.add('is-hidden')
-    no_children.classList.add('is-hidden')
+    visibility.push({ id: nodeId, hasChildren: false, isvisible: false })
+
+    let lone_node = document.getElementById('C' + nodeId)
+
+    console.log(nodeId, lone_node)
+
+    // has_children.classList.add('is-hidden')
+    // no_children.classList.add('is-hidden')
     lone_node.classList.remove('is-hidden')
   }
+}
+
+window.addEventListener('contentChanged', (e) => {
+  loadEditor(`Text content`)
+  getTreeStructure(root)
+})
+
+function validateMyForm() {
+  let title = document.getElementById('title').value
+  let content = document.getElementById('ckeditor').value
+
+  let selected_parent_id = document.getElementById('selected_parent').value
+
+  console.log('title', title)
+  console.log('content', content)
+  console.log('selected_parent_id', selected_parent_id)
+
+  window.livewire.emit('save', title, content, selected_parent_id)
+}
+
+function triggerAdd(idParent) {
+  document.getElementById('selected_parent').value = idParent
+  window.livewire.emit('add')
 }

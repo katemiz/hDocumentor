@@ -1,33 +1,59 @@
-{{-- @if ($istop)
-<div class="has-background-warning ml-4 py-4" tree-root >
-@endif --}}
+@foreach($tree as $key => $branch_arr)
 
-    @foreach($branches as $k => $branch)
-        <div
-            class="ml-4 my-4"
-            tree-branch="{{$branch['id']}}"
-            wire:key="{{$branch['id']}}"
-            parent="{{$parent}}"
-            order="{{$branch['sort_order']}}"
-            draggable="true">
+    @php
+    foreach ($chapters as $key => $arr) {
 
-            <span id="Icons{{$branch['id']}}" >
-                <span class="icon is-small" id="A{{$branch['id']}}"><a onclick="toggleBranch('{{$branch['id']}}')"><x-heroicon-o-chevron-right class="has-text-link"/></a></span>
-                <span class="icon is-small" id="B{{$branch['id']}}"><a onclick="toggleBranch('{{$branch['id']}}')"><x-heroicon-o-chevron-down class="has-text-link"/></a></span>
-                <span class="icon is-small" id="C{{$branch['id']}}"><x-heroicon-o-minus class="has-text-info"/></span>
-            </span>
+        if ($arr['id'] == $branch_arr['id']) {
+            $chapter = $arr;
+            break;
+        }
 
-            <span id="Text{{$branch['id']}}">
-                {{$branch['id']}} - <a href="#" draggable="false">{{$branch['title']}}</a>
-            </span>
+    }
+    @endphp
 
-            @if($branch['children'])
-                <x-tree-branch :branches="$branch['children']" istop="{{false}}" parent="{{$branch['id']}}"/>
-            @endif
-        </div>
-    @endforeach
+    <div
+    class="ml-4"
+    tree-branch="{{$branch_arr['id']}}"
+    wire:key="{{$branch_arr['id']}}"
+    parent="{{ $chapter['parent_id']}}"
+    draggable="true">
 
-{{-- @if ($istop)
-</div>
-@endif --}}
+        <span id="Icons{{$branch_arr['id']}}" draggable="false">
+            @isset($branch_arr['children'])
+                <span class="icon is-small"  id="A{{$branch_arr['id']}}">
+                    <a onclick="toggleBranch('{{$branch_arr['id']}}')">
+                        <x-heroicon-o-chevron-right class="has-text-link"/>
+                    </a>
+                </span>
+                <span class="icon is-small" id="B{{$branch_arr['id']}}">
+                    <a onclick="toggleBranch('{{$branch_arr['id']}}')">
+                        <x-heroicon-o-chevron-down class="has-text-link"/>
+                    </a>
+                </span>
+            @else
+                <span class="icon is-small" id="C{{$branch_arr['id']}}">
+                    <x-heroicon-o-minus class="has-text-info"/>
+                </span>
+            @endisset
+        </span>
 
+        <span id="Text{{$branch_arr['id']}}" draggable="false">
+            @foreach ($chapters as $chapter)
+                @if ($chapter['id'] === $branch_arr['id'])
+                    {{$chapter['id']}}-{{$chapter['title']}} <a href="#" draggable="false">{{$chapter['title']}}</a>
+                @endif
+            @endforeach
+        </span>
+
+        <span class="icon is-small ">
+            <a onclick="triggerAdd({{$branch_arr['id']}})">
+                <x-heroicon-o-plus-circle class="has-text-link"/>
+            </a>
+        </span>
+
+        @isset($branch_arr['children'])
+            <x-tree-branch :tree="$branch_arr['children']" :chapters="$chapters"/>
+        @endisset
+
+    </div>
+@endforeach

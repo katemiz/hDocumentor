@@ -3,41 +3,6 @@
     <script src="{{ asset('/js/ckeditor5/ckeditor.js') }}"></script>
     <script src="{{ asset('/js/loadckeditor.js') }}"></script>
 
-    <script>
-        window.addEventListener('contentChanged', (e) => {
-            loadEditor(`Type the actionnnn item description here`)
-            getTreeStructure(root)
-        });
-
-
-        function validateMyForm() {
-
-            let title = document.getElementById('title').value
-            let content = document.getElementById('ckeditor').value
-
-            console.log(title)
-            console.log(content)
-
-            window.livewire.emit('save', title,content)
-        }
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="columns">
 
@@ -62,11 +27,30 @@
             </div>
 
 
-            <div class="column py-4" tree-root >
+            {{-- <div class="column py-4" tree-root >
                 @if (count($doctree->chapters) >0 )
                     <x-tree-branch :branches="$doctree->chapters" istop="{{true}}" parent="0"/>
                 @else
                     <div>No tree info</div>
+                @endif
+            </div> --}}
+
+
+            <div class="column py-4" root >
+
+                <input type="label" id="selected_parent" value="0" />
+
+                @if ( count($tree) > 0 )
+                {{-- <pre>
+                @php
+                    print_r($tree);
+                    print_r($chapters);
+                @endphp
+                </pre> --}}
+
+                    <x-tree-branch :tree="$tree" :chapters="$chapters"/>
+                @else
+                    <div>No branch exists</div>
                 @endif
             </div>
 
@@ -83,6 +67,32 @@
         </div>
 
         <div class="column">
+
+
+
+
+
+
+
+
+                <pre>
+                @php
+
+
+
+
+
+
+
+
+
+
+
+
+                    // print_r($chapters);
+                @endphp
+                </pre>
+
 
             @switch($action)
 

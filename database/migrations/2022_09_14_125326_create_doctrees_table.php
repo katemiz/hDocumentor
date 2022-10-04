@@ -18,7 +18,10 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->text('title')->nullable();
             $table->text('remarks')->nullable();
-            $table->text('tree')->nullable();
+            $table
+                ->text('tree')
+                ->nullable()
+                ->default(null);
             $table->timestamps();
         });
     }

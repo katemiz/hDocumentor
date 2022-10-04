@@ -7,13 +7,24 @@
 
           <div class="columns">
 
-            <div class="column is-7">
+            <div class="column content is-7">
                 <p class="title">Documents in <span class="has-text-white">HTML</span></p>
                 <p class="subtitle">Your Docs, Your Freedom</p>
 
-                <p class="has-text-dark mt-6 pt-6">
-                    Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.
+                <p class="has-text-dark mt-4 pt-4">
+                    HDocumentor App removes need for a different word processing app.
+                    HDocumentor is an application designed especially for writing, organizing and serving your documents.
+                    Since it uses HTML for formatting text, all you need is a browser and internet connection.
                 </p>
+
+                <ul class="has-text-dark mt-4 pt-4">
+                    <li>Structured Hierarchical Regulations : Write your documents and organize them with drag and drop</li>
+                    <li>Technical Documentation</li>
+                    <li>Business Letters : Use predefined format to write/store your letters</li>
+                    <li>Requirements</li>
+                    <li>Minutes of Meetings/ Action Items</li>
+                    <li>Manuals / Help Files</li>
+                </ul>
             </div>
 
             <div class="column">
